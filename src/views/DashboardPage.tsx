@@ -1,7 +1,10 @@
-import React from 'react'
+
+import { ProgressBard } from '../components'
 
 export const DashboardPage = () => {
   return (
-    <div>DashboardPage</div>
+    <>
+      <ProgressBard/>
+    </>
   )
 }

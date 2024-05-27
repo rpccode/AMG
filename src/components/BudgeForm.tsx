@@ -8,32 +8,41 @@ import { RiCashLine } from "@remixicon/react";
 import { useMemo, useState } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useBudget } from "../hooks/useBudget";
+import { Budget } from "../interfaces/budget";
 
 export const BudgeForm = () => {
   const navigate = useNavigate()
-  const [budget, setBudget] = useState(0);
+  const {AddBudget} = useBudget()
+  const [budget, setBudget] = useState<Budget>({ budget: 0 });
 
   const handleBudget = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBudget(parseInt(e.target.value));
+    const newBudgetValue = parseInt(e.target.value);
+    // console.log(newBudgetValue)
+    setBudget({ budget: newBudgetValue });
   };
 
-  const isValid = useMemo(()=>{
-    return isNaN(budget) || budget <= 0;
-  },[budget])
+  const isValid = useMemo(() => {
+  
+    return !budget || isNaN(budget.budget) || budget?.budget <= 0;
+  }, [budget])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (budget <= 0) {
-     return Swal.fire({
+    if (budget?.budget <= 0) {
+      return Swal.fire({
         title: 'Presupuesto no valido!',
         text: 'Por favor, digte un presupuesto valido',
         icon: 'error',
         confirmButtonText: 'Close'
       })
     }
-    
-    // navigate('/admin/')
+    AddBudget({ budget: budget?.budget })
+
+    navigate('/admin/')
   };
+
+  
   return (
     <>
       {/* {error && <Callout title="Sales Performance" color="red">{error}</Callout>} */}
@@ -52,7 +61,7 @@ export const BudgeForm = () => {
               name="budget"
               placeholder="Define tu presupuest"
               className="text-tremor-content dark:text-dark-tremor-content dark:bg-tremor-background bg-tremor-background-emphasis"
-              value={budget}
+              value={budget.budget}
               onChange={(E) => handleBudget(E)}
             />
           </div>
@@ -65,7 +74,7 @@ export const BudgeForm = () => {
           </Button>
         </form>
       </Card>
-      
+
     </>
   );
 };
