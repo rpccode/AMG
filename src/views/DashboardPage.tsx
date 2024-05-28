@@ -6,16 +6,12 @@ import { ProgressCircleCard } from '../components/ProgressCircleCard'
 export const DashboardPage = () => {
   return (
     <>
-    <BudgetTracker/>
-      {/* <ProgressBard/> */}
-      
+      <BudgetTracker/>
       <ProgressCircleCard/>
       <ProgressCircleCard/>
       <ProgressCircleCard/>
       <ProgressCircleCard/>
       <ProgressCircleCard/>
-    
-
     </>
   )
 }
