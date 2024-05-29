@@ -1,5 +1,6 @@
 
 import { Outlet } from "react-router-dom";
+import { NavBard } from "../components/NavBard";
 
 
 const AppLayout = () => {
@@ -10,11 +11,11 @@ const AppLayout = () => {
           Administrador de Gastos
         </h1>
       </header>
-    
       <div className="flex flex-col items-center justify-center h-full">
-          <Outlet />
-        </div>
-        {/* <ProgressBard/> */}
+
+        <Outlet />
+      </div>
+      {/* <ProgressBard/> */}
     </>
   );
 };

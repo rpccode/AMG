@@ -6,21 +6,24 @@ type AmountDisplayProps = {
   label: string,
   amount: number,
   color?: string,
-  size?:string
+  size?: string
 }
 
-export const AmountDisplay = ({ label, amount, color,size }: AmountDisplayProps) => {
+export const AmountDisplay = ({ label, amount, color, size }: AmountDisplayProps) => {
   const { budgetValue } = useBudget()
 
   const porcentaje = useMemo(() => {
     return (amount / budgetValue) * 100
   }, [amount, budgetValue])
 
-  let colorBar = ''
-  if (porcentaje >= 90) colorBar = 'green'
-  else if (porcentaje <= 50) colorBar = 'orange'
-  else if (porcentaje <= 20) colorBar = 'yellow'
-  // else if (porcentaje <= 5) colorBar = 'red'
+  let  colorBar = useMemo(() => {
+    if (porcentaje >= 90) return 'red';
+    else if (porcentaje >= 50) return 'orange';
+    else if (porcentaje >= 20) return 'yellow';
+    else if (porcentaje >= 5) return 'blue';
+    else return 'red';
+  }, [porcentaje])
+
 
   return (
     <div className="flex justify-start space-x-5 items-center">
