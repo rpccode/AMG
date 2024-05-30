@@ -1,6 +1,5 @@
 import { Card, Icon } from "@tremor/react";
 import { AmountDisplay } from "../components/AmountDisplay";
-import { RiCurrencyLine, RiHome5Line, RiPieChartLine, RiShapesFill, RiWallet2Line } from "@remixicon/react";
 import { NavBard } from "../components/NavBard";
 
 export const DashboardPage = () => {

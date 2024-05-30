@@ -1,6 +1,8 @@
 import { ProgressCircle } from "@tremor/react"
 import { useBudget } from "../hooks/useBudget"
 import { useMemo } from "react"
+import { getColorBar } from "../helpers/ColorSelected"
+import { valueFormatter } from "../helpers/valueFormatter"
 
 type AmountDisplayProps = {
   label: string,
@@ -16,18 +18,12 @@ export const AmountDisplay = ({ label, amount, color, size }: AmountDisplayProps
     return (amount / budgetValue) * 100
   }, [amount, budgetValue])
 
-  let  colorBar = useMemo(() => {
-    if (porcentaje >= 90) return 'red';
-    else if (porcentaje >= 50) return 'orange';
-    else if (porcentaje >= 20) return 'yellow';
-    else if (porcentaje >= 5) return 'blue';
-    else return 'red';
-  }, [porcentaje])
+   color = useMemo(() => getColorBar(porcentaje), [porcentaje]);
 
 
   return (
     <div className="flex justify-start space-x-5 items-center">
-      <ProgressCircle value={porcentaje} size={size} color={colorBar}>
+      <ProgressCircle value={porcentaje} size={size} color={color}>
         <span className="font-medium text-xs text-tremor-content dark:text-dark-tremor-content-strong">{porcentaje.toFixed(0)}%</span>
       </ProgressCircle>
       <div>
@@ -35,7 +31,7 @@ export const AmountDisplay = ({ label, amount, color, size }: AmountDisplayProps
           {label}
         </p>
         <p className="text-tremor-default text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">
-          ${amount}/${budgetValue} ({porcentaje.toFixed(0)}%)
+          <span className={`text-${color}-400`}>{valueFormatter(amount)}</span>/{valueFormatter(budgetValue)} ({porcentaje.toFixed(0)}%)
         </p>
       </div>
     </div>
