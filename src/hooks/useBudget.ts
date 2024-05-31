@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../config/hooks";
 import { BudgetSlice, addAllBudget, addBudget } from "../config/slices/BudgetSlices";
-import { Budget } from "../interfaces/budget";
+import { Budget } from "../config/interfaces/budget";
 import { useNavigate } from "react-router-dom";
 
 
 export const useBudget = () => {
     const navigqate  = useNavigate()
-    const budgetValue = useAppSelector((state: { budget: { budget: 0; }; }) => state.budget.budget)
+    const budgetValue = useAppSelector((state: { budget:Budget }) => state.budget.budget)
     const budget = useAppSelector((state: { budget:Budget; }) => state.budget)
 
 
@@ -25,6 +25,7 @@ export const useBudget = () => {
 
 
     const AddAllBudget = (data: Budget) => {
+      console.log(data)
         dispatch(addAllBudget(data))
     }
 

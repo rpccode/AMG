@@ -1,20 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Budget } from "../../interfaces/budget";
+import { Budget } from "../interfaces/budget";
 import { RootState } from "../store";
 
 
 const initialState: Budget = {
-  id: 0,
+  id: "",
   name: "",
   budget: 0,
   spent: 0,
   percentage: 0,
-  date: "",
+  start_date:"",
+  end_date: "",
   category: "",
   type: "",
   description: "",
-  status: "",
+  status: true,
   icon: "",
 };
 
@@ -26,7 +27,7 @@ export const BudgetSlice = createSlice({
       state.budget = action.payload
     },
     addAllBudget: (state, action) => {
-      state = action.payload
+      return action.payload;
     }
 
   },

@@ -1,19 +1,22 @@
 import { RiAddLine, RiPlug2Line } from "@remixicon/react";
 import { Button, Dialog, DialogPanel, Icon } from "@tremor/react";
 import React from "react";
+import useModal from "../hooks/useModal";
 
 interface Props {
-    children?: React.ReactElement<any, string | React.JSXElementConstructor<any>>
+  children?: React.ReactElement<any, string | React.JSXElementConstructor<any>>;
+  name: string;
 }
 
-export const ModalBase = ({children}:Props) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+export const ModalBase = ({ children, name }: Props) => {
+  const { handleToggleModal, modals } = useModal();
+  const isModalOpen = Boolean(modals[name]);
   return (
     <>
       <div className="fixed right-5 bottom-5 flex items-center justify-center">
         <Icon
           icon={RiAddLine}
-          onClick={() => setIsOpen(true)}
+          onClick={() => handleToggleModal(name)}
           className="text-tremor-default font-medium 
             bg-blue-600
          shadow-tremor-input 
@@ -23,14 +26,12 @@ export const ModalBase = ({children}:Props) => {
       </div>
       <div className="flex justify-center">
         <Dialog
-          open={isOpen}
-          onClose={() => setIsOpen(false)}
+          open={isModalOpen}
+          onClose={() => handleToggleModal(name)}
           static={true}
           className="z-[100]"
         >
-          <DialogPanel className="max-w-sm">
-            {children}
-          </DialogPanel>
+          <DialogPanel className="max-w-sm">{children}</DialogPanel>
         </Dialog>
       </div>
     </>

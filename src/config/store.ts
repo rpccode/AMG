@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { BudgetSlice } from './slices/BudgetSlices'
+import BudgetSlices from './slices/BudgetSlices'
+import ModalSlice from './slices/ModalSlice'
+import ExpensseSlice from './slices/ExpensseSlice'
 // ...
 
 export const store = configureStore({
   reducer: {
-    budget:BudgetSlice.reducer
+    budget:BudgetSlices,
+    modals:ModalSlice,
+    expensse:ExpensseSlice
   },
 })
 

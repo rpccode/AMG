@@ -1,14 +1,15 @@
 export interface Budget {
-    id?: number;
+    id?: string;
     name?: string;
     budget: number;
     spent?: number;
     percentage?: number;
-    date?: string;
+    start_date?: string;
+    end_date?: string;
     category?: string;
     type?: string;
     description?: string;
-    status?: string;
+    status?: boolean;
     icon?: string;
 
 }

@@ -1,19 +1,16 @@
-import {
-  Button,
-  Card,
-  NumberInput,
-} from "@tremor/react";
-import Swal from 'sweetalert2'
+import { Button, Card, NumberInput } from "@tremor/react";
+import Swal from "sweetalert2";
 import { RiCashLine } from "@remixicon/react";
 import { useMemo, useState } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useBudget } from "../hooks/useBudget";
-import { Budget } from "../interfaces/budget";
+import { Budget } from "../config/interfaces/budget";
+import { v4 as uuidv4 } from "uuid";
 
 export const BudgeForm = () => {
-  const navigate = useNavigate()
-  const {AddBudget} = useBudget()
+  const navigate = useNavigate();
+  const { AddBudget, AddAllBudget } = useBudget();
   const [budget, setBudget] = useState<Budget>({ budget: 0 });
 
   const handleBudget = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,26 +20,38 @@ export const BudgeForm = () => {
   };
 
   const isValid = useMemo(() => {
-  
     return !budget || isNaN(budget.budget) || budget?.budget <= 0;
-  }, [budget])
+  }, [budget]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (budget?.budget <= 0) {
       return Swal.fire({
-        title: 'Presupuesto no valido!',
-        text: 'Por favor, digte un presupuesto valido',
-        icon: 'error',
-        confirmButtonText: 'Close'
-      })
+        title: "Presupuesto no valido!",
+        text: "Por favor, digte un presupuesto valido",
+        icon: "error",
+        confirmButtonText: "Close",
+      });
     }
-    AddBudget({ budget: budget?.budget })
+    const newBudget: Budget = {
+      id: uuidv4(),
+      name: "",
+      budget: budget.budget,
+      spent: 0,
+      percentage: 0,
+      start_date: new Date().toLocaleString(),
+      end_date: "",
+      category: "",
+      type: "",
+      description: "",
+      status: true,
+      icon: "",
+    };
+    AddAllBudget(newBudget);
 
-    navigate('/admin/')
+    navigate("/admin/");
   };
 
-  
   return (
     <>
       {/* {error && <Callout title="Sales Performance" color="red">{error}</Callout>} */}
@@ -74,7 +83,6 @@ export const BudgeForm = () => {
           </Button>
         </form>
       </Card>
-
     </>
   );
 };
