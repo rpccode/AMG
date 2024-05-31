@@ -1,6 +1,5 @@
 import { RiArrowRightUpLine } from '@remixicon/react'
 import { Divider, Card } from '@tremor/react'
-import React from 'react'
 import { Expensse } from '../config/interfaces/expensse';
 import { useExpensse } from '../hooks/useExpensse';
 function classNames(...classes: string[]) {
