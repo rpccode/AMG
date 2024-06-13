@@ -1,8 +1,10 @@
 import { Card, Icon } from "@tremor/react";
 import { AmountDisplay } from "../components/AmountDisplay";
 import { NavBard } from "../components/NavBard";
+import { useExpenseData } from "../hooks/useExpenseData";
 
 export const DashboardPage = () => {
+  const {totalAmount,totalBudget} = useExpenseData()
   return (
     <>
       <NavBard />
@@ -12,10 +14,10 @@ export const DashboardPage = () => {
         </p>
 
         <Card>
-          <AmountDisplay label={"Presupuesto"} amount={100} size="lg" />
+          <AmountDisplay label={"Presupuesto"} amount={totalBudget} size="lg" />
         </Card>
         <Card>
-          <AmountDisplay label={"Gastos"} amount={300} size="lg" />
+          <AmountDisplay label={"Gastos"} amount={totalAmount} size="lg" />
         </Card>
         <Card>
           <AmountDisplay label={"Metas"} amount={200} size="lg" />
