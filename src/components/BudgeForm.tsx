@@ -69,7 +69,7 @@ export const BudgeForm = () => {
               id="budget"
               name="budget"
               placeholder="Define tu presupuest"
-              className="text-tremor-content dark:text-dark-tremor-content dark:bg-tremor-background bg-tremor-background-emphasis"
+              className="text-tremor-content dark:text-dark-tremor-content "
               value={budget.budget}
               onChange={(E) => handleBudget(E)}
             />

@@ -64,7 +64,7 @@ export const ExpenseCard = ({ expense }: ExpenseCardProps) => {
               )}
               aria-hidden={true}
             >
-              {expense && <Icon icon={categorieInfo.icon} />}
+              {expense && <Icon icon={categorieInfo.icon} color={categorieInfo.color} />}
             </span>
             <div className="truncate flex-1">
               <p className="truncate text-tremor-default text-tremor-content dark:text-dark-tremor-content">
@@ -83,7 +83,7 @@ export const ExpenseCard = ({ expense }: ExpenseCardProps) => {
             <AmountLabel amount={expense?.amount || 0} color={categorieInfo.color} />
           </div>
           <span
-            className="pointer-events-none absolute right-4 top-4 text-tremor-content-subtle group-hover:text-tremor-content dark:text-dark-tremor-content-subtle group-hover:dark:text-dark-tremor-content"
+            className="pointer-events-none absolute right-4 top-4 text-sm text-tremor-content-subtle group-hover:text-tremor-content dark:text-dark-tremor-content-subtle group-hover:dark:text-dark-tremor-content"
             aria-hidden={true}
           >
             {porcentaje.toFixed(2)}%
