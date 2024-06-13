@@ -1,6 +1,6 @@
 // 'use client';
 import { Card, DonutChart, List, ListItem } from "@tremor/react";
-import { valueFormatter } from "../helpers/valueFormatter";
+import { percentageFormatter, valueFormatter } from "../helpers/valueFormatter";
 import { Idata } from "../config/interfaces/IBills";
 
 function classNames(...classes: string[]) {
@@ -55,7 +55,7 @@ export default function BudgetTracker2({title, data}:BudgetTrackerProps) {
                 {valueFormatter(item.amount)}
               </span>
               <span className="rounded-tremor-small bg-tremor-background-subtle px-1.5 py-0.5 text-tremor-label font-medium tabular-nums text-tremor-content-emphasis dark:bg-dark-tremor-background-subtle dark:text-dark-tremor-content-emphasis">
-                {item.share}
+                {percentageFormatter(parseFloat(item.share))}
               </span>
             </div>
           </ListItem>

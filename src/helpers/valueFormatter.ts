@@ -1,6 +1,10 @@
-export const valueFormatter = (number: number) =>
-    `$ ${Intl.NumberFormat("us").format(number).toString()}`;
+export const valueFormatter = (number: number) => {
+  return `$ ${Intl.NumberFormat("en-US").format(number)}`;
+};
 
+export const percentageFormatter = (number: number) => {
+  return `${(number * 100).toFixed(2)}%`;
+};
 
     export const dateFormatter = (dateStr: string) => {
       console.log(dateStr);
